@@ -11,23 +11,40 @@ import {
 
 import useStyles from './styles';
 
-const Product = ({ product: { price, name, description } }) => {
+const Product = ({
+    product: { id, name, description, price, media },
+    onAddToCart,
+}) => {
     const classes = useStyles();
 
     return (
         <Card className={classes.root}>
-            <CardMedia className={classes.media} image="" title={name} />
+            <CardMedia
+                className={classes.media}
+                image={media.source}
+                title={name}
+            />
             <CardContent>
                 <div className={classes.cardContent}>
-                    <Typography variant="h5" gutterBottom>
+                    <Typography
+                        variant="h5"
+                        className={classes.text}
+                        gutterBottom
+                        noWrap
+                    >
                         {name}
                     </Typography>
-                    <Typography variant="h5">{price}</Typography>
+                    <Typography variant="h5" className={classes.text} noWrap>
+                        {price.formatted_with_code}
+                    </Typography>
                 </div>
-                <Typography>{description}</Typography>
+                <Typography dangerouslySetInnerHTML={{ __html: description }} />
             </CardContent>
             <CardActions disableSpacing className={classes.cardActions}>
-                <IconButton aria-label="Add to cart">
+                <IconButton
+                    aria-label="Add to cart"
+                    onClick={() => onAddToCart(id, 1)}
+                >
                     <AddShoppingCartIcon />
                 </IconButton>
             </CardActions>

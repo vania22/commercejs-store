@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
     root: {
@@ -8,20 +8,23 @@ export default makeStyles(() => ({
         flexDirection: 'column',
     },
     media: {
-        height: 0,
-        paddingTop: '56.25%', // 16:9
+        height: 260,
         backgroundPosition: 'center',
         backgroundSize: 'contain',
         backgroundRepeat: 'no-repeat',
+    },
+    cardContent: {
+        display: 'flex',
+        justifyContent: 'space-between',
     },
     cardActions: {
         display: 'flex',
         justifyContent: 'flex-end',
         marginTop: 'auto',
     },
-    cardContent: {
+    buttons: {
         display: 'flex',
-        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     text: {
         fontSize: 16,
