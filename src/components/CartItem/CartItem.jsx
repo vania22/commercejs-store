@@ -11,7 +11,9 @@ import {
 import useStyles from './styles';
 
 const CartItem = ({
-    product: { name, description, quantity, line_total: price, media },
+    product: { id, name, description, quantity, line_total: price, media },
+    updateQuantity,
+    removeItem,
 }) => {
     const classes = useStyles();
     return (
@@ -31,11 +33,19 @@ const CartItem = ({
             </CardContent>
             <CardActions className={classes.cartActions}>
                 <div className={classes.buttons}>
-                    <Button type="button" size="small">
+                    <Button
+                        type="button"
+                        size="small"
+                        onClick={() => updateQuantity(id, quantity - 1)}
+                    >
                         -
                     </Button>
                     <Typography>{quantity}</Typography>
-                    <Button type="button" size="small">
+                    <Button
+                        type="button"
+                        size="small"
+                        onClick={() => updateQuantity(id, quantity + 1)}
+                    >
                         +
                     </Button>
                 </div>
@@ -44,6 +54,7 @@ const CartItem = ({
                     type="button"
                     color="secondary"
                     style={{ marginLeft: 'auto' }}
+                    onClick={() => removeItem(id)}
                 >
                     Remove
                 </Button>

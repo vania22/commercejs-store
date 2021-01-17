@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Container, Grid, Typography } from '@material-ui/core';
 
 import makeStyles from './styles';
 import CartItem from '../CartItem/CartItem';
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, updateQuantity, removeItem, emptyCart }) => {
     const classes = makeStyles();
     console.log(cart);
 
@@ -19,7 +20,12 @@ const Cart = ({ cart }) => {
             <Grid container spacing={3}>
                 {cart.line_items.map((product) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} key={product.id}>
-                        <CartItem product={product} key={product.id} />
+                        <CartItem
+                            product={product}
+                            updateQuantity={updateQuantity}
+                            removeItem={removeItem}
+                            key={product.id}
+                        />
                     </Grid>
                 ))}
             </Grid>
@@ -34,6 +40,7 @@ const Cart = ({ cart }) => {
                         type="button"
                         variant="contained"
                         color="secondary"
+                        onClick={emptyCart}
                     >
                         Empty Cart
                     </Button>
@@ -43,6 +50,8 @@ const Cart = ({ cart }) => {
                         type="button"
                         variant="contained"
                         color="primary"
+                        component={Link}
+                        to="/checkout"
                     >
                         Checkout
                     </Button>
