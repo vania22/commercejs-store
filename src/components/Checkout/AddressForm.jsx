@@ -13,7 +13,7 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { commerce } from '../../lib/commerce';
 import FormInput from './FormInput';
 
-const AddressForm = ({ checkoutToken, next }) => {
+const AddressForm = ({ checkoutToken, procceedToPaymentForm }) => {
     const methods = useForm();
 
     const [shippingCountries, setShippingCountries] = useState([]);
@@ -83,7 +83,7 @@ const AddressForm = ({ checkoutToken, next }) => {
             <FormProvider {...methods}>
                 <form
                     onSubmit={methods.handleSubmit((data) =>
-                        next({
+                        procceedToPaymentForm({
                             ...data,
                             shippingCountry,
                             shippingSubdivision,

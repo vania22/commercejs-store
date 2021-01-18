@@ -8,13 +8,13 @@ import PaymentForm from './PaymentForm';
 
 const steps = ['Shipping address', 'Payment details'];
 
-const Checkout = ({ cart }) => {
+const Checkout = ({ cart, handleCheckout, order, errorMessage }) => {
     const classes = useStyles();
     const [activeStep, setActiveStep] = useState(0);
     const [checkoutToken, setCheckoutToken] = useState(null);
     const [shippingData, setShippingData] = useState({});
 
-    const next = (data) => {
+    const procceedToPaymentForm = (data) => {
         setShippingData(data);
         nextStep();
     };
@@ -44,13 +44,16 @@ const Checkout = ({ cart }) => {
         activeStep === 0 ? (
             <AddressForm
                 checkoutToken={checkoutToken}
-                next={next}
+                procceedToPaymentForm={procceedToPaymentForm}
                 nextStep={nextStep}
             />
         ) : (
             <PaymentForm
                 previousStep={previousStep}
                 checkoutToken={checkoutToken}
+                shippingData={shippingData}
+                handleCheckout={handleCheckout}
+                nextStep={nextStep}
             />
         );
 
